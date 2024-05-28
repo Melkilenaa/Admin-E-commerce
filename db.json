@@ -1,0 +1,11 @@
+{
+  "products": [
+    {
+      "id": "3259",
+      "name": "Fault in Our Stars",
+      "description": "Hazel and Gus are teenagers who meet at a cancer support group and fall in love. They both share the same acerbic wit and a love of books, especially \"An Imperial Affliction\", so they embark on a journey to visit an author in Amsterdam.",
+      "price": 1000,
+      "imageUrl": "https://th.bing.com/th/id/OIP.x47fWkni_C5XjNn_pTDx0gHaNK?w=115&h=180&c=7&r=0&o=5&pid=1.7"
+    }
+  ]
+}
