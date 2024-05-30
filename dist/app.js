@@ -14,9 +14,16 @@ const productNameInput = document.querySelector('#product-name');
 const productDescriptionInput = document.querySelector('#product-description');
 const productPriceInput = document.querySelector('#product-price');
 const productImageInput = document.querySelector('#product-image');
+const productDetails = document.querySelector('.overlay');
+let isEditing = false;
+let currentEditProductId = null;
 // Add New Product
 productForm.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
+    if (isEditing && currentEditProductId) {
+        yield handleEditProduct(e, currentEditProductId);
+        return;
+    }
     const newProduct = {
         name: productNameInput.value,
         description: productDescriptionInput.value,
@@ -56,56 +63,36 @@ function fetchProducts() {
         }
     });
 }
-// Display Products
+// Display Products to the admin
 function displayProducts(products) {
     productList.innerHTML = '';
     products.forEach((product) => {
         const row = document.createElement('li');
         row.classList.add('product');
         row.innerHTML = `
-          <img src="${product.imageUrl}" alt="Product Image">
-          <h3>${product.name}</h3>
-          <p>Ksh${product.price}</p>
-          <div class="product-actions">
-              <button class="view-product" data-id="${product.id}">View</button>
-              <button class="edit-product" data-id="${product.id}">Edit</button>
-              <button class="delete-product" data-id="${product.id}">Delete</button>
-          </div>
+        <img src="${product.imageUrl}" alt="Product Image">
+        <h3>${product.name}</h3>
+        <p>Ksh${product.price}</p>
+        <div class="product-actions">
+          <button class="edit-product" data-id="${product.id}">Edit</button>
+          <button class="delete-product" data-id="${product.id}">Delete</button>
+          <button class="view-product"data-id = "${product.id}">View</button>
+        </div>
       `;
         productList.appendChild(row);
     });
-    // Add event listeners for View, Edit, and Delete buttons
-    const viewButtons = document.querySelectorAll('.view-product');
+    // Add event listeners for Edit and Delete buttons
     const editButtons = document.querySelectorAll('.edit-product');
     const deleteButtons = document.querySelectorAll('.delete-product');
-    viewButtons.forEach((button) => {
-        button.addEventListener('click', viewProduct);
-    });
+    const viewButtons = document.querySelectorAll('.view-product');
     editButtons.forEach((button) => {
         button.addEventListener('click', editProduct);
     });
     deleteButtons.forEach((button) => {
         button.addEventListener('click', deleteProduct);
     });
-}
-// View Product
-function viewProduct(e) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const button = e.target;
-        const productId = button.dataset.id;
-        if (!productId) {
-            console.error('Product ID is undefined');
-            return;
-        }
-        try {
-            const response = yield fetch(`http://localhost:3000/products/${productId}`);
-            const product = yield response.json();
-            // Display product details in a modal or a separate section
-            console.log('View Product:', product);
-        }
-        catch (error) {
-            console.error('Error:', error);
-        }
+    viewButtons.forEach((button) => {
+        button.addEventListener('click', viewProduct);
     });
 }
 // Edit Product
@@ -120,20 +107,19 @@ function editProduct(e) {
         try {
             const response = yield fetch(`http://localhost:3000/products/${productId}`);
             const product = yield response.json();
-            // Populate form fields with the product data
             productNameInput.value = product.name;
             productDescriptionInput.value = product.description;
             productPriceInput.value = product.price.toString();
             productImageInput.value = product.imageUrl;
-            // Add event listener for form submission
-            productForm.addEventListener('submit', (e) => handleEditProduct(e, productId));
+            isEditing = true;
+            currentEditProductId = productId;
         }
         catch (error) {
             console.error('Error:', error);
         }
     });
 }
-// Handle Edit Product Submission
+// Handle Edit Product
 function handleEditProduct(e, productId) {
     return __awaiter(this, void 0, void 0, function* () {
         e.preventDefault();
@@ -155,6 +141,8 @@ function handleEditProduct(e, productId) {
             if (response.ok) {
                 clearForm();
                 fetchProducts();
+                isEditing = false;
+                currentEditProductId = null;
             }
             else {
                 console.error('Failed to update product');
@@ -165,7 +153,37 @@ function handleEditProduct(e, productId) {
         }
     });
 }
-// Delete Product
+function viewProduct(e) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const button = e.target;
+        const productId = button.dataset.id;
+        if (!productId) {
+            console.error('Product ID is undefined');
+            return;
+        }
+        try {
+            const response = yield fetch(`http://localhost:3000/products/${productId}`);
+            const product = yield response.json();
+            const overlay = document.getElementById('product-overlay');
+            const overlayImage = document.getElementById('overlay-image');
+            const overlayName = document.getElementById('overlay-name');
+            const overlayDescription = document.getElementById('overlay-description');
+            const overlayPrice = document.getElementById('overlay-price');
+            overlayImage.src = product.imageUrl;
+            overlayName.textContent = product.name;
+            overlayDescription.textContent = product.description;
+            overlayPrice.textContent = `Ksh${product.price}`;
+            overlay.style.display = 'block';
+            const closeButton = document.getElementById('close-overlay');
+            closeButton.addEventListener('click', () => {
+                overlay.style.display = 'none';
+            });
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+    });
+}
 function deleteProduct(e) {
     return __awaiter(this, void 0, void 0, function* () {
         const button = e.target;
@@ -193,6 +211,8 @@ function deleteProduct(e) {
 // Clear Form
 function clearForm() {
     productForm.reset();
+    isEditing = false;
+    currentEditProductId = null;
 }
 // Initialize
 fetchProducts();

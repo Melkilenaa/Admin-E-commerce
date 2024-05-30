@@ -48,27 +48,44 @@
                 </div>
             </form>
         </section>
-        
-
-        <section class="product-list">
+        <div class="outside">
             <h2>Products</h2>
-            <div class="product-actions">
+            <br>
+            <button class="View-one"> View One</button>
+            <button class = "view-all"> View All</button>
+        </div>
+        <section class="product-list">
+            <!-- <div class="product-actions">
                 <button class="add-product">Add New Product</button>
                 <input type="text" placeholder="Search products..." class="search-product">
-            </div>
+            </div> -->
             <ul class="products">
                 <li class="product">
                     <img src="assets/BTTWSSMARTB-01-MAIN-HR.jpg" alt="Product Image">
-                    <h3>Air Pods</h3>
-                    <p>19.99</p>
+                    <div class="contents">
+                        <h3>Air Pods</h3>
+                        <p>19.99</p>
+                        <div class="products-actions">
+                            <button class="edit-product">Edit</button>
+                            <button class="delete-product">Delete</button>
+                            <button class="view-product"data-id = "view-product">View</button>
+                        </div> 
+                    </div>
+                   
                 </li>
-                <div class="products-actions">
-                    <button class="view-product">View</button>
-                    <button class="edit-product">Edit</button>
-                    <button class="delete-product">Delete</button>
-                </div>
+               
                 <!-- Add more product items here -->
             </ul>
+            <div id="product-overlay" style="display:none;">
+                <div class="overlay-content">
+                    <img id="overlay-image" src="" alt="Product Image">
+                    <h3 id="overlay-name"></h3>
+                    <p id="overlay-description"></p>
+                    <p id="overlay-price"></p>
+                    <button id="close-overlay">Close</button>
+                </div>
+
+            
         </section>
 
     </main>

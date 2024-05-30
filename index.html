@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Showcase</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <header>
         <nav>
-            <div class="logo">Logo</div>
+            <div class="logo"> Furni </div>
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Products</a></li>
@@ -18,37 +18,40 @@
             </ul>
         </nav>
     </header>
-    
-    <main>
-        <section class="hero-section">
-            <div class="hero-content">
-                <h1>Featured Product</h1>
-                <p>Product Description</p>
-                <button>Buy Now</button>
-            </div>
-            <div class="hero-image">
-                <img src="placeholder-image.jpg" alt="Product Image">
-            </div>
-        </section>
-        
-        <section class="product-grid">
-            <h2>More Products</h2>
-            <div class="product-items">
-                <div class="product-item">
-                    <img src="placeholder-image.jpg" alt="Product Image">
-                    <h3>Product Name</h3>
-                    <p>Product Description</p>
-                    <button>Buy Now</button>
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Modern Interior <br> <span clsas="d-block">Design Studio</span></h1>
+                        <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+                        <p><a href="" class="btn btn-secondary me-2">Shop Now</a>
+                            <a href="#" class="btn btn-white-outline">Explore</a>
+                        </p>
+                    </div>
                 </div>
-                <!-- Add more product items here -->
+                <div class="col-lg-7">
+                    <div class="hero-img-wrap">
+                        <img src="assets/couch.png" class="img-fluid">
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
-    
+        </div>
+    </div>
+<h3>Products</h3>
+<div class="products">
+    <div class="furniture">
+        <img src="assets/product-1.png" alt="product1">
+        <p>Product name</p> <br>
+        <p>Product Description</p><br>
+        <p>Product Price</p>
+    </div>
+
+</div>
     <footer>
         <p>&copy; 2023 Company Name</p>
     </footer>
     
-    
+    <script src="/dist/app.js"></script>
 </body>
 </html>
