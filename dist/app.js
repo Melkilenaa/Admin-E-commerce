@@ -17,7 +17,6 @@ const productImageInput = document.querySelector('#product-image');
 const productDetails = document.querySelector('.overlay');
 let isEditing = false;
 let currentEditProductId = null;
-// Add New Product
 productForm.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
     if (isEditing && currentEditProductId) {
@@ -50,7 +49,6 @@ productForm.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, 
         console.error('Error:', error);
     }
 }));
-// Fetch Products
 function fetchProducts() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -63,7 +61,6 @@ function fetchProducts() {
         }
     });
 }
-// Display Products to the admin
 function displayProducts(products) {
     productList.innerHTML = '';
     products.forEach((product) => {
@@ -81,7 +78,6 @@ function displayProducts(products) {
       `;
         productList.appendChild(row);
     });
-    // Add event listeners for Edit and Delete buttons
     const editButtons = document.querySelectorAll('.edit-product');
     const deleteButtons = document.querySelectorAll('.delete-product');
     const viewButtons = document.querySelectorAll('.view-product');
@@ -95,7 +91,6 @@ function displayProducts(products) {
         button.addEventListener('click', viewProduct);
     });
 }
-// Edit Product
 function editProduct(e) {
     return __awaiter(this, void 0, void 0, function* () {
         const button = e.target;
@@ -119,7 +114,6 @@ function editProduct(e) {
         }
     });
 }
-// Handle Edit Product
 function handleEditProduct(e, productId) {
     return __awaiter(this, void 0, void 0, function* () {
         e.preventDefault();
@@ -208,11 +202,9 @@ function deleteProduct(e) {
         }
     });
 }
-// Clear Form
 function clearForm() {
     productForm.reset();
     isEditing = false;
     currentEditProductId = null;
 }
-// Initialize
 fetchProducts();

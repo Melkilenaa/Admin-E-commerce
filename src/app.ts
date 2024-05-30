@@ -5,7 +5,6 @@ interface Product {
     price: number;
     imageUrl: string;
   }
-  
   const productList = document.querySelector('.products') as HTMLUListElement;
   const productForm = document.querySelector('form') as HTMLFormElement;
   const productNameInput = document.querySelector('#product-name') as HTMLInputElement;
@@ -15,8 +14,6 @@ interface Product {
   const productDetails = document.querySelector('.overlay') as HTMLInputElement;
   let isEditing = false;
   let currentEditProductId: string | null = null;
-  
-  // Add New Product
   productForm.addEventListener('submit', async (e) => {
     e.preventDefault();
   
@@ -51,8 +48,6 @@ interface Product {
       console.error('Error:', error);
     }
   });
-  
-  // Fetch Products
   async function fetchProducts() {
     try {
       const response = await fetch('http://localhost:3000/products');
@@ -62,8 +57,6 @@ interface Product {
       console.error('Error:', error);
     }
   }
-  
-  // Display Products to the admin
   function displayProducts(products: Product[]) {
     productList.innerHTML = '';
     products.forEach((product) => {
@@ -81,8 +74,6 @@ interface Product {
       `;
       productList.appendChild(row);
     });
-  
-    // Add event listeners for Edit and Delete buttons
     const editButtons = document.querySelectorAll('.edit-product');
     const deleteButtons = document.querySelectorAll('.delete-product');
     const viewButtons = document.querySelectorAll('.view-product');
@@ -98,9 +89,6 @@ interface Product {
         button.addEventListener('click', viewProduct);
     });
   }
-  
-  
-  // Edit Product
   async function editProduct(e: Event) {
     const button = e.target as HTMLButtonElement;
     const productId = button.dataset.id;
@@ -126,8 +114,6 @@ interface Product {
       console.error('Error:', error);
     }
   }
-  
-  // Handle Edit Product
   async function handleEditProduct(e: Event, productId: string) {
     e.preventDefault();
     const updatedProduct: Product = {
@@ -167,7 +153,6 @@ interface Product {
         console.error('Product ID is undefined');
         return;
     }
-
     try {
         const response = await fetch(`http://localhost:3000/products/${productId}`);
         const product: Product = await response.json();
@@ -220,15 +205,12 @@ interface Product {
     }
   }
   
-
-  // Clear Form
   function clearForm() {
     productForm.reset();
     isEditing = false;
     currentEditProductId = null;
   }
   
-  // Initialize
   fetchProducts();
 
   
