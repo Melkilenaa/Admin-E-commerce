@@ -26,11 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const cartItemDiv = document.createElement('div');
             cartItemDiv.classList.add('furniture');
             cartItemDiv.innerHTML = `
-                <img src="${product.imageUrl}" alt="${product.name}">
-                <p>${product.name}</p>
-                <p>${product.description}</p>
-                <p>Ksh${product.price}</p>
-                <p>Quantity: ${cartItem.quantity}</p>
+            <img src="${product.imageUrl}" alt="product1">
+            <p>${product.name}</p> <br>
+            <p>${product.description}</p><br>
+            <p>${product.price}</p>
+            <button id="buy"> Buy Item</button>
+            <button id ="remove-from-cart">Drop from the Cart</button>
             `;
             cartItemsContainer.appendChild(cartItemDiv);
         });
