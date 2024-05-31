@@ -14,15 +14,10 @@ const productNameInput = document.querySelector('#product-name');
 const productDescriptionInput = document.querySelector('#product-description');
 const productPriceInput = document.querySelector('#product-price');
 const productImageInput = document.querySelector('#product-image');
-const productDetails = document.querySelector('.overlay');
 let isEditing = false;
 let currentEditProductId = null;
 productForm.addEventListener('submit', (e) => __awaiter(void 0, void 0, void 0, function* () {
     e.preventDefault();
-    if (isEditing && currentEditProductId) {
-        yield handleEditProduct(e, currentEditProductId);
-        return;
-    }
     const newProduct = {
         name: productNameInput.value,
         description: productDescriptionInput.value,
@@ -67,27 +62,24 @@ function displayProducts(products) {
         const row = document.createElement('li');
         row.classList.add('product');
         row.innerHTML = `
-        <img src="${product.imageUrl}" alt="Product Image">
-        <h3>${product.name}</h3>
-        <p>Ksh${product.price}</p>
-        <div class="product-actions">
-          <button class="edit-product" data-id="${product.id}">Edit</button>
-          <button class="delete-product" data-id="${product.id}">Delete</button>
-          <button class="view-product"data-id = "${product.id}">View</button>
-        </div>
-      `;
+      <img src="${product.imageUrl}" alt="Product Image">
+      <h3>${product.name}</h3>
+      <p>Ksh${product.price}</p>
+      <div class="product-actions">
+        <button class="edit-product" data-id="${product.id}">Edit</button>
+        <button class="delete-product" data-id="${product.id}">Delete</button>
+        <button class="view-product" data-id="${product.id}">View</button>
+      </div>
+    `;
         productList.appendChild(row);
     });
-    const editButtons = document.querySelectorAll('.edit-product');
-    const deleteButtons = document.querySelectorAll('.delete-product');
-    const viewButtons = document.querySelectorAll('.view-product');
-    editButtons.forEach((button) => {
+    document.querySelectorAll('.edit-product').forEach(button => {
         button.addEventListener('click', editProduct);
     });
-    deleteButtons.forEach((button) => {
+    document.querySelectorAll('.delete-product').forEach(button => {
         button.addEventListener('click', deleteProduct);
     });
-    viewButtons.forEach((button) => {
+    document.querySelectorAll('.view-product').forEach(button => {
         button.addEventListener('click', viewProduct);
     });
 }
@@ -203,8 +195,12 @@ function deleteProduct(e) {
     });
 }
 function clearForm() {
-    productForm.reset();
-    isEditing = false;
-    currentEditProductId = null;
+    productNameInput.value = '';
+    productDescriptionInput.value = '';
+    productPriceInput.value = '';
+    productImageInput.value = '';
 }
-fetchProducts();
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM content loaded');
+    fetchProducts();
+});
