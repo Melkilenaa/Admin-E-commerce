@@ -74,8 +74,11 @@
     /* .hero .hero-img-wrap {
       position: relative;
      } */
+    
       .hero .hero-img-wrap img {
         position: relative;
+        margin-top: 5%;
+        margin-left: 35%;
         top: 0px;
         right: 300px;
         z-index: 2;
@@ -196,9 +199,6 @@ h3 {
 width: 30px;
 height: 30px;
 
-}
-ion-icon:hover{
-  color:red;
 } */
 button{
   display: inline-block;
