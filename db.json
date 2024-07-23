@@ -13,12 +13,29 @@
       "description": "wijenmsa",
       "price": 3000,
       "imageUrl": "https://th.bing.com/th/id/OIP.fi7IvTRMDvc3PGgzd2PSlwHaHa?w=176&h=180&c=7&r=0&o=5&pid=1.7"
+    },
+    {
+      "id": "45ca",
+      "name": "Surface Duo 2",
+      "description": ":djsljgosdmas;d\nsflkdfskdfs\nsfd lfsd' \nsdf\nsdf\ns'df\n'''\nfdsf'\nsd klfsdmlsdf,;lf.sd/f.sd/.fsd",
+      "price": 250,
+      "imageUrl": "https://imgs.search.brave.com/OjNr7FzYvAdI8EAvqYnQ3Kyg2IN9IUAMa8XBSfrM104/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/bW9zLmNtcy5mdXR1/cmVjZG4ubmV0L0Nt/Z2k0RFFvdlRxZ05r/U1F0ZUZ5WUEtMzIw/LTgwLmpwZw"
     }
   ],
   "cart": [
     {
       "id": "ec21",
       "productId": "cc37",
+      "quantity": 1
+    },
+    {
+      "id": "2319",
+      "productId": "e3d5",
+      "quantity": 1
+    },
+    {
+      "id": "1f15",
+      "productId": "45ca",
       "quantity": 1
     }
   ]
